@@ -28,11 +28,15 @@ Before you can begin tracking time you must setup `couch-time`. This is done by 
 
 All projects begun after this command will belong to elephants. This can be overriden by using the `--tag` argument when beginning a project.
 
-## Begin Tracking Time
+## Start Tracking Time
 
     couch-time begin --tag elephants All words from here on will be the message
 
-## End Tracking Time
+    couch-time begin Use previous tag
+
+    couch-time begin All "messages " will be joined together into a single string
+
+## Stop Tracking Time
 
     couch-time end
 
