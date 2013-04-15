@@ -1,0 +1,33 @@
+{
+  "name": "couch-time",
+  "version": "0.0.1-alpha",
+  "description": "Track time across computers so you don't have to do it later on the couch",
+  "bin": "./bin/couch-time-cli.js",
+  "preferGlobal": true,
+  "dependencies": {
+    "addressable": "~0.3.3",
+    "cli": "~0.4.4-2",
+    "concat-stream": "~0.1.1",
+    "cookie-jar": "~0.2.0",
+    "ini": "~1.1.0",
+    "nano": "~3.3.8"
+  },
+  "repository": "git://github.com/mimetnet/couch-time.git",
+  "homepage": "https://github.com/mimetnet/couch-time",
+  "bugs": {"url":"https://github.com/mimetnet/couch-time/issues"},
+  "keywords": [
+    "couchdb",
+    "time",
+    "track"
+  ],
+  "author": {
+    "name": "Matthew I. Metnetsky",
+    "email": "matthew@cowarthill.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT +no-false-attribs",
+      "url": "https://fedoraproject.org/wiki/Licensing/MITNFA"
+    }
+  ]
+}
