@@ -9,7 +9,15 @@ module.exports = function(args, opts) {
 
             cfg.nano().insert(cfg.last, function(err, ret, headers) {
                 if (err) {
-                    console.error(err);
+                    switch (err.status_code) {
+                        case 409:
+                            console.error('Error:', err.reason, 'Is last._rev up-to-date with CouchDB?');
+                            break;
+
+                        default:
+                            console.error(err);
+                            break;
+                    }
                 } else if (true === ret.ok) {
                     cfg.last._rev = ret.rev;
 
