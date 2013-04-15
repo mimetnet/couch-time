@@ -20,37 +20,27 @@ to insall from GIT or just checkout the code.
 
 Before you can begin tracking time you must setup `couch-time`. This is done by configuring a [CouchDB](https://couchdb.apache.org/) database:
 
-``` js
-couch-time auth http://[user]:[passwd]@[couchdb.com]/[db_name]
-```
+    couch-time auth http://[user]:[passwd]@[couchdb.com]/[db_name]
 
 ## Set the current tag/project
 
-``` js
-couch-time tag elephants
-```
+    couch-time tag elephants
 
 All projects begun after this command will belong to elephants. This can be overriden by using the `--tag` argument when beginning a project.
 
 ## Begin Tracking Time
 
-``` js
-couch-time begin --tag elephants All words from here on will be the message
-```
+    couch-time begin --tag elephants All words from here on will be the message
 
 ## End Tracking Time
 
-``` js
-couch-time end
-```
+    couch-time end
 
 You can do this as many times as you want. It will just continue to push out the end date.
 
 ## Destroy your current work 
 
-``` js
-couch-time clear
-```
+    couch-time clear
 
 This will erase, delete, clear, pick-your-favorite-word, your current entry. Current is defined by `begin` and not reset on `end` (though the later might change).
 
