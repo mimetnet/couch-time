@@ -22,6 +22,8 @@ Before you can begin tracking time you must setup `couch-time`. This is done by 
 
     couch-time auth http://[user]:[passwd]@[couchdb.com]/[db_name]
 
+Not all database require authentication, but if they do we use [nano](https://github.com/dscape/nano#using-cookie-authentication)'s auth() method, which supports CouchDB's [cookie authentication](http://guide.couchdb.org/editions/1/en/security.html#cookies).
+
 ## Set the current tag/project
 
     couch-time tag elephants
