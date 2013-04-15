@@ -9,7 +9,7 @@ An application for tracking time across numerous (coming soon) terminals. There 
 
 # Usage
 
-This project uses [cli](https://github.com/chriso/cli) so all commands (first word following `couch-time`) will be [auto-completed](https://github.com/chriso/cli/blob/master/examples/command.js) like [npm](https://github.com/isaacs/npm).
+This project uses [`cli`](https://github.com/chriso/cli) so all commands (first word following `couch-time`) will be [auto-completed](https://github.com/chriso/cli/blob/master/examples/command.js) like [`npm`](https://github.com/isaacs/npm).
 
 ## Install
 
@@ -18,7 +18,7 @@ to insall from GIT or just checkout the code.
 
 ## Configuration
 
-Before you can begin tracking time you must setup `couch-time`. This is done by configuring a [CouchDB](https://couchdb.apache.org/) database:
+Before you can begin tracking time you must setup `couch-time`. This is done by configuring a [`CouchDB`](https://couchdb.apache.org/) database:
 
     couch-time auth http://[user]:[passwd]@[couchdb.com]/[db_name]
 
