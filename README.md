@@ -7,16 +7,14 @@ An application for tracking time across numerous (coming soon) terminals. There 
 - [timetrap](https://github.com/samg/timetrap)
 - [timepouch](https://github.com/chesles/timepouch)
 
-# Install
+# Usage
+
+This project uses [cli](https://github.com/chriso/cli) so all commands (first word following `couch-time`) will be [auto-completed](https://github.com/chriso/cli/blob/master/examples/command.js) like [npm](https://github.com/isaacs/npm).
+
+## Install
 
 Not yet added to [`npm`](http://npmjs.org)! But in the meantime you can use `npm`
 to insall from GIT or just checkout the code.
-
-Otherwise, you can fork the code @ [GitHub](https://github.com/mimetnet/couch-time/).
-
-# Usage
-
-As this project uses [cli](https://github.com/chriso/cli) all commands (first word following `couch-time`) will be [auto-completed](https://github.com/chriso/cli/blob/master/examples/command.js) like [npm](https://github.com/isaacs/npm).
 
 ## Configuration
 
@@ -26,10 +24,18 @@ Before you can begin tracking time you must setup `couch-time`. This is done by 
 couch-time auth http://[user]:[passwd]@[couchdb.com]/[db_name]
 ```
 
+## Set the current tag/project
+
+``` js
+couch-time tag elephants
+```
+
+All projects begun after this command will belong to elephants. This can be overriden by using the `--tag` argument when beginning a project.
+
 ## Begin Tracking Time
 
 ``` js
-couch-time begin --tag project All words from here on will be the message
+couch-time begin --tag elephants All words from here on will be the message
 ```
 
 ## End Tracking Time
