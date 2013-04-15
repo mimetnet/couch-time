@@ -9,7 +9,7 @@
     cli.enable('status', 'version');
     cli.setApp(path.join(__dirname, '..', 'package.json'));
     cli.parse({
-        tag: ['t', 'Tag / Product']
+        tag: ['t', 'Tag / Product', 'string']
     }, [
         'auth',
         'begin',
