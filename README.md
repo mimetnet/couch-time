@@ -68,3 +68,4 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 	- [editor](https://github.com/substack/node-editor)
 	- [ini](https://github.com/isaacs/ini)
 	- [nano](https://github.com/dscape/nano)
+	- [reltime](https://github.com/rsdoiel/reltime)
