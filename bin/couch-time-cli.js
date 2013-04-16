@@ -16,6 +16,7 @@
         'begin',
         'clear',
         'end',
+        'update',
         'tag'
     ]);
 
@@ -35,6 +36,10 @@
 
             case 'end':
                 require('../cmd/end.js')(args, opts);
+                break;
+
+            case 'update':
+                require('../cmd/update.js')(args, opts);
                 break;
 
             case 'tag':
