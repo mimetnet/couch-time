@@ -1,4 +1,5 @@
-var config = require('../lib/config.js'),
+var vim = require('../lib/vim.js'),
+    config = require('../lib/config.js'),
     insert = require('../lib/insert.js');
 
 function begin(cfg, date, row) {
@@ -18,14 +19,11 @@ function begin(cfg, date, row) {
     });
 }
 
-module.exports = function(args, opts) {
-    if (0 === args.length)
-        return;
-
+function save(opts, msg) {
     config.load(function(cfg) {
         var date = new Date(), row = {
             _id: date.getTime().toString(),
-            msg: args.join(' '),
+            msg: msg,
             end: null,
             tag: (opts.tag || ((cfg.last && cfg.last.tag)? cfg.last.tag : null))
         };
@@ -47,6 +45,18 @@ module.exports = function(args, opts) {
             begin(cfg, date, row);
         }
     });
+}
+
+module.exports = function(args, opts) {
+    if (0 === args.length) {
+        vim(function(error, data) {
+            if (error) {
+                console.error(error);
+            } else if ('string' === typeof(data)) {
+                save(opts, data);
+            }
+        });
+    } else {
+        save(opts, args.join(' '));
+    }
 };
-
-
