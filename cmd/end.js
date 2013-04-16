@@ -1,4 +1,5 @@
-var config = require('../lib/config.js');
+var config = require('../lib/config.js'),
+    insert = require('../lib/insert.js');
 
 module.exports = function(args, opts) {
     var date = new Date();
@@ -7,19 +8,11 @@ module.exports = function(args, opts) {
         if (cfg.last) {
             cfg.last.end = date.getTime();
 
-            cfg.nano().insert(cfg.last, function(err, ret, headers) {
-                if (err) {
-                    switch (err.status_code) {
-                        case 409:
-                            console.error('Error:', err.reason, 'Is last._rev up-to-date with CouchDB?');
-                            break;
-
-                        default:
-                            console.error(err);
-                            break;
-                    }
-                } else if (true === ret.ok) {
-                    cfg.last._rev = ret.rev;
+            insert(cfg.nano(), cfg.last, function(error, ret) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    cfg.last = ret;
 
                     config.save(cfg, function() {
                         console.log('End @', date);
