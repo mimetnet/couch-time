@@ -54,7 +54,7 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 - [x] `begin` should `end` previous work if we know about it
 - [ ] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
-- [ ] `begin` w/out arguments should launch $EDITOR
+- [x] `begin` w/out arguments should launch $EDITOR
 
 # Credits
 
@@ -65,5 +65,6 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 	- [cli](https://github.com/chriso/cli)
 	- [concat-stream](https://github.com/maxogden/node-concat-stream)
 	- [cookie-jar](https://github.com/mikeal/cookie-jar)
+	- [editor](https://github.com/substack/node-editor)
 	- [ini](https://github.com/isaacs/ini)
 	- [nano](https://github.com/dscape/nano)
