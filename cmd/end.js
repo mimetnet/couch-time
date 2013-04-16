@@ -1,8 +1,13 @@
 var config = require('../lib/config.js'),
-    insert = require('../lib/insert.js');
+    insert = require('../lib/insert.js'),
+    reltime = require('reltime');
 
 module.exports = function(args, opts) {
     var date = new Date();
+
+    if (opts.when) {
+        date = reltime.parse(date, opts.when);
+    }
 
     config.load(function(cfg) {
         if (cfg.last) {

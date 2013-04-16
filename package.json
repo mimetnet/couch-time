@@ -11,7 +11,8 @@
     "cookie-jar": "~0.2.0",
     "editor": "~0.0.4",
     "ini": "~1.1.0",
-    "nano": "~3.3.8"
+    "nano": "~3.3.8",
+    "reltime": "~0.0.1"
   },
   "repository": "git://github.com/mimetnet/couch-time.git",
   "homepage": "https://github.com/mimetnet/couch-time",

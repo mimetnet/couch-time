@@ -9,7 +9,8 @@
     cli.enable('status', 'version');
     cli.setApp(path.join(__dirname, '..', 'package.json'));
     cli.parse({
-        tag: ['t', 'Tag / Product', 'string']
+        tag: ['t', 'Tag / Product', 'string'],
+        when: ['w', 'When did this event occur (-15m)', 'string']
     }, [
         'auth',
         'begin',
