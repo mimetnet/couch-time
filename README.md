@@ -52,7 +52,7 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 
 # TODO
 - [x] `begin` should `end` previous work if we know about it
-- [ ] allow `end` or create `edit` to update current message
+- [x] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
 - [x] `begin` w/out arguments should launch $EDITOR
 
