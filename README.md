@@ -38,6 +38,16 @@ All projects begun after this command will belong to elephants. This can be over
 
     couch-time begin All "messages " will be joined together into a single string
 
+    couch-time begin
+
+The last one will launch $EDITOR, enabling full control over the layout.
+
+## Update current work item
+
+    couch-time update
+
+Update the message of your current work item by launching $EDITOR. Any changes you make will be saved locally and published when you `end` this work.
+
 ## Stop Tracking Time
 
     couch-time end
@@ -55,6 +65,7 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 - [x] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
 - [x] `begin` w/out arguments should launch $EDITOR
+- [ ] Reports, reports, and oh yeah, reports
 
 # Credits
 
