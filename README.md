@@ -51,7 +51,7 @@ You can do this as many times as you want. It will just continue to push out the
 This will erase, delete, clear, pick-your-favorite-word, your current entry. Current is defined by `begin` and not reset on `end` (though the later might change).
 
 # TODO
-- [ ] `begin` should `end` previous work if we know about it
+- [x] `begin` should `end` previous work if we know about it
 - [ ] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
 - [ ] `begin` w/out arguments should launch $EDITOR
