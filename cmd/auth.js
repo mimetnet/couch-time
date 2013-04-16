@@ -34,7 +34,11 @@ function auth(data) {
 module.exports = function(args, opts) {
     config.load(function(data) {
         if (0 === args.length) {
-            data.auth.cookie = null;
+            if ('object' === typeof(data.auth)) {
+                data.auth.cookie = null;
+            } else {
+                data.auth = {cookie: null};
+            }
         } else {
             var uri = args[0];
 
