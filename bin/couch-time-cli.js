@@ -17,7 +17,8 @@
         'clear',
         'end',
         'update',
-        'tag'
+        'tag',
+        'today'
     ]);
 
     cli.main(function(args, opts) {
@@ -46,6 +47,9 @@
                 require('../cmd/tag.js')(args, opts);
                 break;
 
+            case 'today':
+                require('../cmd/today.js')(args, opts);
+                break;
         }
     });
 })();
