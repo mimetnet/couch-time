@@ -74,9 +74,12 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 - The projects that make this possible
 	- [addressable](https://github.com/publicclass/addressable)
 	- [cli](https://github.com/chriso/cli)
+	- [cli-table](https://github.com/LearnBoost/cli-table)
 	- [concat-stream](https://github.com/maxogden/node-concat-stream)
 	- [cookie-jar](https://github.com/mikeal/cookie-jar)
+	- [countdown](http://countdownjs.org/)
 	- [editor](https://github.com/substack/node-editor)
 	- [ini](https://github.com/isaacs/ini)
+	- [moment](http://momentjs.com/)
 	- [nano](https://github.com/dscape/nano)
 	- [reltime](https://github.com/rsdoiel/reltime)
