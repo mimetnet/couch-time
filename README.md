@@ -65,7 +65,10 @@ This will erase, delete, clear, pick-your-favorite-word, your current entry. Cur
 - [x] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
 - [x] `begin` w/out arguments should launch $EDITOR
+- [ ] Bulk insert (for the day?)
 - [ ] Reports, reports, and oh yeah, reports
+	- [x] Generate Report for the day
+ 				`couch-time today`
 
 # Credits
 
