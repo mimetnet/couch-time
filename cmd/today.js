@@ -4,10 +4,15 @@ var config = require('../lib/config.js'),
     Table = require('cli-table');
 
 function workTime(list) {
-    var f = list[0], l = list[list.length - 1], beg, end, str;
+    var beg = 0, end = 0, str;
 
-    beg = parseInt(f.doc._id, 10);
-    end = l.doc.end || new Date();
+    if (0 < list.length) {
+        var f = list[0], l = list[list.length - 1];
+
+        beg = parseInt(f.doc._id, 10);
+        end = l.doc.end || new Date();
+    }
+
     str = countdown(beg, end, countdown.HOURS | countdown.MINUTES).toString();
 
     return {'Work': str};
