@@ -3,6 +3,7 @@
 ;(function() {
     var cmd, opts, path;
 
+    fs = require('fs');
     cli = require('cli');
     path = require('path');
 
@@ -22,34 +23,15 @@
     ]);
 
     cli.main(function(args, opts) {
-        switch (cli.command) {
-            case 'auth':
-                require('../cmd/auth.js')(args, opts);
-                break;
+        var filename = path.join(__dirname, '..', 'cmd', cli.command + '.js');
 
-            case 'begin':
-                require('../cmd/begin.js')(args, opts);
-                break;
-
-            case 'clear':
-                require('../cmd/clear.js')(args, opts);
-                break;
-
-            case 'end':
-                require('../cmd/end.js')(args, opts);
-                break;
-
-            case 'update':
-                require('../cmd/update.js')(args, opts);
-                break;
-
-            case 'tag':
-                require('../cmd/tag.js')(args, opts);
-                break;
-
-            case 'today':
-                require('../cmd/today.js')(args, opts);
-                break;
-        }
+        fs.exists(filename, function(exists) {
+            if (exists) {
+                require(filename)(args, opts);
+            } else {
+                console.error('Command not found:', filename);
+                process.exit(1);
+            }
+        });
     });
 })();
