@@ -19,7 +19,8 @@
         'end',
         'update',
         'tag',
-        'today'
+        'today',
+        'replicate'
     ]);
 
     cli.main(function(args, opts) {
