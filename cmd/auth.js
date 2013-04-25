@@ -17,7 +17,13 @@ function auth(data) {
     var cdb = data.nano();
 
     cdb.auth(data.couch.user, data.couch.passwd, function(err, ret, headers) {
-        if (true === ret.ok) {
+        if (err) {
+            if ('unauthorized' === err.error) {
+                console.error(err.reason);
+            } else {
+                console.error(err);
+            }
+        } else {
             var ck = new Cookie(headers['set-cookie'][0]);
 
             if ('AuthSession' === ck.name && 0 < ck.value.length) {
