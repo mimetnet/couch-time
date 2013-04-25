@@ -60,11 +60,18 @@ You can do this as many times as you want. It will just continue to push out the
 
 This will erase, delete, clear, pick-your-favorite-word, your current entry. Current is defined by `begin` and not reset on `end` (though the later might change).
 
+## Replicate database (backup, relocate)
+
+    couch-time replicate [db-name | http://[user]:[passwd]@couchdb.com/db_name]
+
+This calls [nano](https://github.com/dscape/nano#nanodbreplicatesource-target-opts-callback)'s replicate() method and passes in each command-line argument as the `source`. Please be-aware that the database being replicate to *must* exist. This will help ensure that you have setup security before copying any records to it.
+
 # TODO
 - [x] `begin` should `end` previous work if we know about it
 - [x] allow `end` or create `edit` to update current message
 - [ ] handle Iris Couch being "off-line"
 - [x] `begin` w/out arguments should launch $EDITOR
+- [x] Replicate database for backup, relocation, etc
 - [ ] Bulk insert (for the day?)
 - [ ] Reports, reports, and oh yeah, reports
 	- [x] Generate Report for the day
