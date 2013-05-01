@@ -19,6 +19,20 @@ config.load(function(cfg) {
 
     cli.enable('status', 'version');
     cli.setApp(path.join(__dirname, '..', 'package.json'));
+
+    if (cfg.alias && 2 < process.argv.length) {
+        var a = process.argv[2];
+
+        if ('string' === typeof((a = cfg.alias[a]))) {
+            var argv = process.argv.slice(0, 2).concat(a.split(' '));
+
+            if (3 < process.argv.length)
+                argv = argv.concat(process.argv.slice(3));
+
+            cli.setArgv(argv);
+        }
+    }
+
     cli.parse({
         tag: ['t', 'Tag / Product', 'string'],
         when: ['w', 'When did this event occur (-15m)', 'string']
