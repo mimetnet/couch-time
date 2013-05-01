@@ -1,6 +1,5 @@
 var config = require('../lib/config.js'),
-    addressable = require('addressable'),
-    Cookie = require('cookie-jar');
+    addressable = require('addressable');
 
 function couch(uri) {
     return {
@@ -17,22 +16,21 @@ function auth(data) {
     var cdb = data.nano();
 
     cdb.auth(data.couch.user, data.couch.passwd, function(err, ret, headers) {
-        if (err) {
+        if (config.auth(data, headers)) {
+            config.save(data, function() {
+                console.log('Configuration updated');
+            });
+        } else if (err) {
             if ('unauthorized' === err.error) {
                 console.error(err.reason);
             } else {
                 console.error(err);
             }
         } else {
-            var ck = new Cookie(headers['set-cookie'][0]);
-
-            if ('AuthSession' === ck.name && 0 < ck.value.length) {
-                data.auth.cookie = ck.value;
-            }
-
-            config.save(data, function() {
-                console.log('Configuration updated');
-            });
+            console.error('Unexpected auth result!');
+            console.error('  >> err:', err);
+            console.error('  >> resp:', resp);
+            console.error('  >> headers:', headers);
         }
     });
 }
