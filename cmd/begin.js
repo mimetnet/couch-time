@@ -4,12 +4,14 @@ var vim = require('../lib/vim.js'),
     reltime = require('reltime');
 
 function begin(cfg, date, row, done) {
-    insert(cfg.nano(), row, function(error, ret) {
+    insert(cfg.nano(), row, function(error, ret, headers) {
         if (error) {
             console.error('Failed to save new record:', error);
         } else {
             cfg.last = ret;
         }
+
+        config.auth(cfg, headers);
 
         // save either way b/c cfg
         // last will either be new record or
