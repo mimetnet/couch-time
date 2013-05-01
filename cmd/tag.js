@@ -1,6 +1,6 @@
 var config = require('../lib/config.js');
 
-module.exports = function(args, opts) {
+module.exports = function(args, opts, cfg) {
     var tag;
 
     if (1 !== args.length) {
@@ -10,15 +10,13 @@ module.exports = function(args, opts) {
         tag = args[0];
     }
 
-    config.load(function(cfg) {
-        if (cfg.last) {
-            cfg.last.tag = tag;
-        } else {
-            cfg.last = {tag: tag};
-        }
+    if (cfg.last) {
+        cfg.last.tag = tag;
+    } else {
+        cfg.last = {tag: tag};
+    }
 
-        config.save(cfg, function() {
-            console.log('Tag:', tag);
-        });
+    config.save(cfg, function() {
+        console.log('Tag:', tag);
     });
 };
