@@ -35,33 +35,31 @@ function auth(data) {
     });
 }
 
-module.exports = function(args, opts) {
-    config.load(function(data) {
-        if (0 === args.length) {
-            if ('object' === typeof(data.auth)) {
-                data.auth.cookie = null;
-            } else {
-                data.auth = {cookie: null};
-            }
+module.exports = function(args, opts, data) {
+    if (0 === args.length) {
+        if ('object' === typeof(data.auth)) {
+            data.auth.cookie = null;
         } else {
-            var uri = args[0];
-
-            if (null === (uri = addressable.parse(uri))) {
-                console.error('URI not parsable by `addressable`');
-            } else if (!(uri.host)) {
-                console.error('url.host not parsed');
-            } else if (!(uri.pathname)) {
-                console.error('url.pathname (database) not defined');
-            } else if ('http' !== uri.scheme && 'https' !== uri.scheme) {
-                console.error(uri.scheme, 'not support. Scheme must be http or https');
-            } else {
-                data.couch = couch(uri);
-                data.auth.cookie = null;
-            }
+            data.auth = {cookie: null};
         }
+    } else {
+        var uri = args[0];
 
-        if ('object' === typeof(data.couch)) {
-            auth(data);
+        if (null === (uri = addressable.parse(uri))) {
+            console.error('URI not parsable by `addressable`');
+        } else if (!(uri.host)) {
+            console.error('url.host not parsed');
+        } else if (!(uri.pathname)) {
+            console.error('url.pathname (database) not defined');
+        } else if ('http' !== uri.scheme && 'https' !== uri.scheme) {
+            console.error(uri.scheme, 'not support. Scheme must be http or https');
+        } else {
+            data.couch = couch(uri);
+            data.auth.cookie = null;
         }
-    });
+    }
+
+    if ('object' === typeof(data.couch)) {
+        auth(data);
+    }
 };
