@@ -24,7 +24,7 @@ function totalTime(total) {
     return {'Time': str};
 }
 
-module.exports = function(args, opts) {
+module.exports = function(args, opts, cfg) {
     var query, date = new Date();
 
     query = {
@@ -34,39 +34,37 @@ module.exports = function(args, opts) {
         endkey: moment(date).endOf('day').valueOf().toString()
     };
 
-    config.load(function(cfg) {
-        cfg.nano().list(query, function(err, ret, headers) {
-            if (err) {
-                console.error(err);
-            } else {
-                var t = 0, tab;
+    cfg.nano().list(query, function(err, ret, headers) {
+        if (err) {
+            console.error(err);
+        } else {
+            var t = 0, tab;
 
-                tab = new Table({
-                    head: ['Tag', 'Desc', 'Duration']
-                });
+            tab = new Table({
+                head: ['Tag', 'Desc', 'Duration']
+            });
 
-                ret.rows.forEach(function(row) {
-                    var s, e, d;
+            ret.rows.forEach(function(row) {
+                var s, e, d;
 
-                    s = parseInt(row.doc._id, 10);
-                    e = (row.doc.end? parseInt(row.doc.end, 10) : new Date().getTime());
-                    d = e - s;
-                    t = t + d;
+                s = parseInt(row.doc._id, 10);
+                e = (row.doc.end? parseInt(row.doc.end, 10) : new Date().getTime());
+                d = e - s;
+                t = t + d;
 
-                    tab.push([
-                         row.doc.tag || '',
-                         row.doc.msg,
-                         countdown(s, e, countdown.MINUTES).toString()
-                    ]);
-                });
+                tab.push([
+                     row.doc.tag || '',
+                     row.doc.msg,
+                     countdown(s, e, countdown.MINUTES).toString()
+                ]);
+            });
 
-                console.log(tab.toString());
+            console.log(tab.toString());
 
-                tab = new Table();
-                tab.push(totalTime(t));
-                tab.push(workTime(ret.rows));
-                console.log(tab.toString());
-            }
-        });
+            tab = new Table();
+            tab.push(totalTime(t));
+            tab.push(workTime(ret.rows));
+            console.log(tab.toString());
+        }
     });
 };
