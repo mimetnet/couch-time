@@ -26,49 +26,47 @@ function begin(cfg, date, row, done) {
     });
 }
 
-function save(opts, msg, done) {
-    config.load(function(cfg) {
-        var date = new Date(), row = {
-            _id: date.getTime().toString(),
-            msg: msg,
-            end: null,
-            tag: (opts.tag || ((cfg.last && cfg.last.tag)? cfg.last.tag : null))
-        };
+function save(cfg, opts, msg, done) {
+    var date = new Date(), row = {
+        _id: date.getTime().toString(),
+        msg: msg,
+        end: null,
+        tag: (opts.tag || ((cfg.last && cfg.last.tag)? cfg.last.tag : null))
+    };
 
-        if (opts.when) {
-            date = reltime.parse(date, opts.when);
-            row._id = date.getTime().toString();
-        }
+    if (opts.when) {
+        date = reltime.parse(date, opts.when);
+        row._id = date.getTime().toString();
+    }
 
-        // last `begin` hasn't been stopped
-        if ('object' === typeof(cfg.last) && 'number' !== typeof(cfg.last.end)) {
-            cfg.last.end = date.getTime();
+    // last `begin` hasn't been stopped
+    if ('object' === typeof(cfg.last) && 'number' !== typeof(cfg.last.end)) {
+        cfg.last.end = date.getTime();
 
-            insert(cfg.nano(), cfg.last, function(error, last) {
-                if (error) {
-                    console.error('Failed to save end date on last record:', error);
-                } else {
-                    cfg.last = last;
+        insert(cfg.nano(), cfg.last, function(error, last) {
+            if (error) {
+                console.error('Failed to save end date on last record:', error);
+            } else {
+                cfg.last = last;
 
-                    begin(cfg, date, row, done);
-                }
-            });
-        } else {
-            begin(cfg, date, row, done);
-        }
-    });
+                begin(cfg, date, row, done);
+            }
+        });
+    } else {
+        begin(cfg, date, row, done);
+    }
 }
 
-module.exports = function(args, opts) {
+module.exports = function(args, opts, cfg) {
     if (0 === args.length) {
         vim(function(error, data, done) {
             if (error) {
                 console.error(error);
             } else if ('string' === typeof(data)) {
-                save(opts, data, done);
+                save(cfg, opts, data, done);
             }
         });
     } else {
-        save(opts, args.join(' '));
+        save(cfg, opts, args.join(' '));
     }
 };
