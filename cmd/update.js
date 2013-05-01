@@ -1,8 +1,7 @@
 var vim = require('../lib/vim.js'),
     config = require('../lib/config.js');
 
-module.exports = function(args, opts) {
-    config.load(function(cfg) {
+    module.exports = function(args, opts, cfg) {
         if (!cfg.last) {
             console.log('You have nothing to end.... have you begun something?');
             return;
@@ -23,5 +22,4 @@ module.exports = function(args, opts) {
                 });
             }
         });
-    });
-};
+    };
