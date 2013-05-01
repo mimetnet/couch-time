@@ -13,12 +13,13 @@ module.exports = function(args, opts) {
         if (cfg.last) {
             cfg.last.end = date.getTime();
 
-            insert(cfg.nano(), cfg.last, function(error, ret) {
+            insert(cfg.nano(), cfg.last, function(error, ret, headers) {
                 if (error) {
                     console.error(error);
                 } else {
                     cfg.last = ret;
 
+                    config.auth(cfg, headers);
                     config.save(cfg, function() {
                         console.log('End @', date);
                     });
