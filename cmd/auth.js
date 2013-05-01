@@ -12,12 +12,12 @@ function couch(uri) {
     };
 }
 
-function auth(data) {
-    var cdb = data.nano();
+function auth(cfg) {
+    var cdb = cfg.nano();
 
-    cdb.auth(data.couch.user, data.couch.passwd, function(err, ret, headers) {
-        if (config.auth(data, headers)) {
-            config.save(data, function() {
+    cdb.auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
+        if (config.auth(cfg, headers)) {
+            config.save(cfg, function() {
                 console.log('Configuration updated');
             });
         } else if (err) {
@@ -35,12 +35,12 @@ function auth(data) {
     });
 }
 
-module.exports = function(args, opts, data) {
+module.exports = function(args, opts, cfg) {
     if (0 === args.length) {
-        if ('object' === typeof(data.auth)) {
-            data.auth.cookie = null;
+        if ('object' === typeof(cfg.auth)) {
+            cfg.auth.cookie = null;
         } else {
-            data.auth = {cookie: null};
+            cfg.auth = {cookie: null};
         }
     } else {
         var uri = args[0];
@@ -54,12 +54,12 @@ module.exports = function(args, opts, data) {
         } else if ('http' !== uri.scheme && 'https' !== uri.scheme) {
             console.error(uri.scheme, 'not support. Scheme must be http or https');
         } else {
-            data.couch = couch(uri);
-            data.auth.cookie = null;
+            cfg.couch = couch(uri);
+            cfg.auth.cookie = null;
         }
     }
 
-    if ('object' === typeof(data.couch)) {
-        auth(data);
+    if ('object' === typeof(cfg.couch)) {
+        auth(cfg);
     }
 };
