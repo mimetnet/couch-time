@@ -4,25 +4,37 @@ var vim = require('../lib/vim.js'),
     reltime = require('reltime');
 
 function begin(cfg, date, row, done) {
-    insert(cfg.nano(), row, function(error, ret, headers) {
-        if (error) {
-            console.error('Failed to save new record:', error);
-        } else {
-            cfg.last = ret;
-        }
-
-        config.auth(cfg, headers);
-
-        // save either way b/c cfg
-        // last will either be new record or
-        // updated _rev on old record.
-        config.save(cfg, function() {
-            console.log('Begin @', date);
+    insert(config.store(cfg), row, function(err, ret, headers) {
+        if (err) {
+            if ('unauthorized' === err.error) {
+                config.store(cfg).auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
+                    if (config.auth(cfg, headers)) {
+                        config.save(cfg, function() {
+                            begin(cfg, date, row, done);
+                        });
+                    } else {
+                        console.error('Failed to save new record:', err);
+                    }
+                });
+            } else {
+                console.error('Failed to save new record:', err);
+            }
 
             if ('function' === typeof(done)) {
                 done();
             }
-        });
+        } else {
+            cfg.last = ret;
+
+            config.auth(cfg, headers);
+            config.save(cfg, function() {
+                console.log('Begin @', date);
+
+                if ('function' === typeof(done)) {
+                    done();
+                }
+            });
+        }
     });
 }
 
@@ -43,9 +55,21 @@ function save(cfg, opts, msg, done) {
     if ('object' === typeof(cfg.last) && 'number' !== typeof(cfg.last.end)) {
         cfg.last.end = date.getTime();
 
-        insert(cfg.nano(), cfg.last, function(error, last) {
-            if (error) {
-                console.error('Failed to save end date on last record:', error);
+        insert(config.store(cfg), cfg.last, function(err, last, headers) {
+            if (err) {
+                if ('unauthorized' === err.error) {
+                    config.store(cfg).auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
+                        if (config.auth(cfg, headers)) {
+                            config.save(cfg, function() {
+                                save(cfg, opts, msg, done);
+                            });
+                        } else {
+                            console.error(err);
+                        }
+                    });
+                } else {
+                    console.error('Failed to save end date on last record:', err);
+                }
             } else {
                 cfg.last = last;
 

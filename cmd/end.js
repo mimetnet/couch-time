@@ -2,7 +2,7 @@ var config = require('../lib/config.js'),
     insert = require('../lib/insert.js'),
     reltime = require('reltime');
 
-module.exports = function(args, opts, cfg) {
+function end(args, opts, cfg) {
     var date = new Date();
 
     if (opts.when) {
@@ -12,9 +12,21 @@ module.exports = function(args, opts, cfg) {
     if (cfg.last) {
         cfg.last.end = date.getTime();
 
-        insert(cfg.nano(), cfg.last, function(error, ret, headers) {
-            if (error) {
-                console.error(error);
+        insert(config.store(cfg), cfg.last, function(err, ret, headers) {
+            if (err) {
+                if ('unauthorized' === err.error) {
+                    config.store(cfg).auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
+                        if (config.auth(cfg, headers)) {
+                            config.save(cfg, function() {
+                                end(args, opts, cfg);
+                            });
+                        } else {
+                            console.error(err);
+                        }
+                    });
+                } else {
+                    console.error(err);
+                }
             } else {
                 cfg.last = ret;
 
@@ -27,4 +39,6 @@ module.exports = function(args, opts, cfg) {
     } else {
         console.log('You have nothing to end.... have you begun something?');
     }
-};
+}
+
+module.exports = end;
