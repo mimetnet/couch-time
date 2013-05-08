@@ -11,9 +11,9 @@ config.load(function(cfg) {
         'begin',
         'clear',
         'end',
+        'mrf',
         'update',
         'tag',
-        'today',
         'replicate'
     ];
 
