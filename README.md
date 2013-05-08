@@ -93,3 +93,4 @@ This calls [nano](https://github.com/dscape/nano#nanodbreplicatesource-target-op
 	- [moment](http://momentjs.com/)
 	- [nano](https://github.com/dscape/nano)
 	- [reltime](https://github.com/rsdoiel/reltime)
+	- [wordwrap](https://github.com/substack/node-wordwrap)
