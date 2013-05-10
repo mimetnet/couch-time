@@ -60,6 +60,7 @@ function save(cfg, opts, msg, done) {
                 if ('unauthorized' === err.error) {
                     config.store(cfg).auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
                         if (config.auth(cfg, headers)) {
+                            cfg.last.end = null; // reset so we redo entire path
                             config.save(cfg, function() {
                                 save(cfg, opts, msg, done);
                             });
