@@ -13,6 +13,9 @@ var vim = require('../lib/vim.js'),
             } else if ('string' === typeof(data)) {
                 cfg.last.msg = data;
 
+                if ('string' === typeof(opts.tag) && 0 < opts.tag.length)
+                    cfg.last.tag = opts.tag;
+
                 config.save(cfg, function() {
                     console.log('Updated @', (new Date()));
 
