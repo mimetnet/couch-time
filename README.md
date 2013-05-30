@@ -1,6 +1,6 @@
 # couch-time
 
-An application for tracking time across numerous (coming soon) terminals. There are many utilies similar to this, but none that worked the way I wanted. Before picking one, I would suggest playing around with most if not all of them.
+An application for tracking time across numerous (coming soon) terminals. There are many utilities similar to this, but none that worked the way I wanted. Before picking one, I would suggest playing around with most if not all of them.
 
 - [ti](http://ti.sharats.me/)
 - [timed](http://adeel.github.io/timed/)
@@ -54,7 +54,7 @@ Update the message of your current work item by launching $EDITOR. Any changes y
 
 You can do this as many times as you want. It will just continue to push out the end date.
 
-## Destroy your current work 
+## Destroy your current work
 
     couch-time clear
 
