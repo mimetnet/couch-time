@@ -73,6 +73,7 @@ This calls [nano](https://github.com/dscape/nano#nanodbreplicatesource-target-op
 - [x] `begin` w/out arguments should launch $EDITOR
 - [x] Replicate database for backup, relocation, etc
 - [ ] Bulk insert (for the day?)
+- [ ] git-rebase like feature (merge, remove, edit)
 - [ ] Reports, reports, and oh yeah, reports
 	- [x] Generate Report for the day
  				`couch-time today`
