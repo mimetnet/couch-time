@@ -75,8 +75,7 @@ This calls [nano](https://github.com/dscape/nano#nanodbreplicatesource-target-op
 - [ ] Bulk insert (for the day?)
 - [ ] git-rebase like feature (merge, remove, edit)
 - [ ] Reports, reports, and oh yeah, reports
-	- [x] Generate Report for the day
- 				`couch-time today`
+	- [x] Generate Report for the day (`today`, `stats`)
 
 # Credits
 
