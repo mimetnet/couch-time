@@ -2,31 +2,43 @@ var config = require('../lib/config.js'),
     insert = require('../lib/insert.js'),
     reltime = require('reltime');
 
-module.exports = function(args, opts) {
+function end(args, opts, cfg) {
     var date = new Date();
 
     if (opts.when) {
         date = reltime.parse(date, opts.when);
     }
 
-    config.load(function(cfg) {
-        if (cfg.last) {
-            cfg.last.end = date.getTime();
+    if (cfg.last) {
+        cfg.last.end = date.getTime();
 
-            insert(cfg.nano(), cfg.last, function(error, ret, headers) {
-                if (error) {
-                    console.error(error);
-                } else {
-                    cfg.last = ret;
-
-                    config.auth(cfg, headers);
-                    config.save(cfg, function() {
-                        console.log('End @', date);
+        insert(config.store(cfg), cfg.last, function(err, ret, headers) {
+            if (err) {
+                if ('unauthorized' === err.error) {
+                    config.store(cfg).auth(cfg.couch.user, cfg.couch.passwd, function(err, ret, headers) {
+                        if (config.auth(cfg, headers)) {
+                            config.save(cfg, function() {
+                                end(args, opts, cfg);
+                            });
+                        } else {
+                            console.error(err);
+                        }
                     });
+                } else {
+                    console.error(err);
                 }
-            });
-        } else {
-            console.log('You have nothing to end.... have you begun something?');
-        }
-    });
-};
+            } else {
+                cfg.last = ret;
+
+                config.auth(cfg, headers);
+                config.save(cfg, function() {
+                    console.log('End @', date);
+                });
+            }
+        });
+    } else {
+        console.log('You have nothing to end.... have you begun something?');
+    }
+}
+
+module.exports = end;

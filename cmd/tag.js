@@ -1,16 +1,17 @@
 var config = require('../lib/config.js');
 
-module.exports = function(args, opts) {
+module.exports = function(args, opts, cfg) {
     var tag;
 
     if (1 !== args.length) {
-        console.error('Tags can only be one word/string');
-        return;
+        if (cfg.last) {
+            console.log('Tag:', cfg.last.tag);
+        } else {
+            console.log('Tag: undefined');
+        }
+    } else if (!(tag = args.shift()) || 0 === tag.length) {
+        console.error('Cannot assign an empty tag');
     } else {
-        tag = args[0];
-    }
-
-    config.load(function(cfg) {
         if (cfg.last) {
             cfg.last.tag = tag;
         } else {
@@ -20,5 +21,5 @@ module.exports = function(args, opts) {
         config.save(cfg, function() {
             console.log('Tag:', tag);
         });
-    });
+    }
 };

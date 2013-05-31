@@ -1,8 +1,7 @@
 var vim = require('../lib/vim.js'),
     config = require('../lib/config.js');
 
-module.exports = function(args, opts) {
-    config.load(function(cfg) {
+    module.exports = function(args, opts, cfg) {
         if (!cfg.last) {
             console.log('You have nothing to end.... have you begun something?');
             return;
@@ -14,6 +13,9 @@ module.exports = function(args, opts) {
             } else if ('string' === typeof(data)) {
                 cfg.last.msg = data;
 
+                if ('string' === typeof(opts.tag) && 0 < opts.tag.length)
+                    cfg.last.tag = opts.tag;
+
                 config.save(cfg, function() {
                     console.log('Updated @', (new Date()));
 
@@ -23,5 +25,4 @@ module.exports = function(args, opts) {
                 });
             }
         });
-    });
-};
+    };
