@@ -41,10 +41,13 @@ function step(acc, convert) {
     return acc;
 }
 
-function pipeline(map, reduce, finalize, table, rows) {
+function pipeline(map, reduce, finalize, table, rows, cfg) {
     var acc = {}, done = emit.bind({acc:acc});
 
     rows.forEach(function(row, idx) {
+        if (row.doc._id === cfg.last._id)
+            row.doc = cfg.last;
+
         map(row.doc, done, idx);
     });
 
@@ -114,7 +117,7 @@ function mrf(args, opts, cfg) {
                 fin = mod.finalize.bind({});
 
             // map, reduce, finalize
-            res = pipeline(map, red, fin, tab, ret.rows);
+            res = pipeline(map, red, fin, tab, ret.rows, cfg);
 
             // create cli-table
             output(tab, res);
