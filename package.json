@@ -8,7 +8,7 @@
     "addressable": "~0.3.3",
     "cli": "git://github.com/mimetnet/cli.git#master",
     "cli-table": "~0.2.0",
-    "concat-stream": "~0.1.1",
+    "concat-stream": "~1.0.0",
     "cookie-jar": "~0.2.0",
     "countdown": "~2.3.0",
     "editor": "~0.0.4",
