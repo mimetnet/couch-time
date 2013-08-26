@@ -16,7 +16,7 @@
     "moment": "~2.0.0",
     "nano": "~4.0.0",
     "reltime": "~0.0.1",
-    "underscore": "~1.4.4",
+    "underscore": "~1.5.0",
     "wordwrap": "~0.0.2"
   },
   "repository": "git://github.com/mimetnet/couch-time.git",
