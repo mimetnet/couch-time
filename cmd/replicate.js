@@ -9,6 +9,8 @@ module.exports = function(args, opts, cfg) {
                 if ('db_not_found' === err.error) {
                     console.error('Database not found:', err.reason);
                     console.error(' >> Please make sure it exists and that it is secure');
+                } else if ('unauthorized' === err.error) {
+                    console.error('Please re-authenticate:', err.reason);
                 } else {
                     console.error(err);
                 }
