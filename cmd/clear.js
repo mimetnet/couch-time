@@ -11,7 +11,7 @@ module.exports = function(args, opts, cfg) {
                 if (404 === err.status_code) {
                     console.error('Current record not found:', last.msg);
                 } else {
-                    console.error('Unknown Error', error);
+                    console.error('Unknown Error', err);
                 }
             } else if (true === ret.ok) {
                 delete cfg.last;
