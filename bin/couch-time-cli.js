@@ -35,7 +35,8 @@ config.load(function(cfg) {
 
     cli.parse({
         tag: ['t', 'Tag / Product', 'string'],
-        when: ['w', 'When did this event occur (-15m)', 'string']
+        when: ['w', 'When did this event occur (-15m)', 'string'],
+        span: ['s', 'Timespan (year, month, week, day hour', 'string']
     }, cmds);
 
     cli.main(function(args, opts) {
