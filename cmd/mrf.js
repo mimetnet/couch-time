@@ -81,6 +81,11 @@ function output(cfg, rows) {
 function mrf(args, opts, cfg) {
     var query, date = new Date();
 
+    if (0 === args.length) {
+        console.error('mrf alias not found:', process.argv[2]);
+        return;
+    }
+
     query = {
         descending: false,
         include_docs: true,
