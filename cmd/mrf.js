@@ -79,18 +79,21 @@ function output(cfg, rows) {
 }
 
 function mrf(args, opts, cfg) {
-    var query, date = new Date();
+    var query, span, date;
 
     if (0 === args.length) {
         console.error('mrf alias not found:', process.argv[2]);
         return;
     }
 
+    date = new Date();
+    span = ('string' === typeof(opts.span))? opts.span : 'day';
+
     query = {
         descending: false,
         include_docs: true,
-        startkey: moment(date).startOf('day').valueOf().toString(),
-        endkey: moment(date).endOf('day').valueOf().toString()
+        startkey: moment(date).startOf(span).valueOf().toString(),
+        endkey: moment(date).endOf(span).valueOf().toString()
     };
 
     config.store(cfg).list(query, function(err, ret, headers) {
