@@ -13,7 +13,7 @@
     "countdown": "~2.3.0",
     "editor": "~0.0.4",
     "ini": "~1.1.0",
-    "moment": "~2.0.0",
+    "moment": "~2.3.0",
     "nano": "~4.0.0",
     "reltime": "~0.0.1",
     "underscore": "~1.5.0",
