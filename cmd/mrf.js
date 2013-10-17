@@ -1,6 +1,7 @@
 var config = require('../lib/config.js'),
     moment = require('moment'),
-    Table = require('cli-table');
+    Table = require('cli-table'),
+    WHENS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 function emit(id, val) {
     if (false === Array.isArray(this.acc[id]))
@@ -88,6 +89,15 @@ function mrf(args, opts, cfg) {
 
     date = new Date();
     span = ('string' === typeof(opts.span))? opts.span : 'day';
+
+    if ('string' === typeof(opts.when)) {
+        opts.when = opts.when.toLowerCase();
+
+        if (-1 === WHENS.indexOf(opts.when))
+            throw new Error('When value not supported: ' + opts.when);
+
+        date = moment(date).day(opts.when);
+    }
 
     query = {
         descending: false,
