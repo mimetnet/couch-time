@@ -45,7 +45,7 @@ function pipeline(map, reduce, finalize, table, rows, cfg) {
     var acc = {}, done = emit.bind({acc:acc});
 
     rows.forEach(function(row, idx) {
-        if (row.doc._id === cfg.last._id)
+        if ('object' === typeof(cfg.last) && row.doc._id === cfg.last._id)
             row.doc = cfg.last;
 
         map(row.doc, done, idx);
