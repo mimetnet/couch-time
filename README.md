@@ -1,5 +1,7 @@
 # couch-time
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mimetnet/couch-time.svg)](https://greenkeeper.io/)
+
 An application for tracking time across numerous (coming soon) terminals. There are many utilities similar to this, but none that worked the way I wanted. Before picking one, I would suggest playing around with most if not all of them.
 
 - [ti](http://ti.sharats.me/)
